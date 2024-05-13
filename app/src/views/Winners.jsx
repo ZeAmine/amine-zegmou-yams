@@ -1,4 +1,4 @@
-function Home() {
+function Winners() {
   return (
     <main className="home">
       <div className="home-main">
@@ -25,22 +25,6 @@ function Home() {
         </div>
       </div>
       <div className="home-info">
-        <div className="home-info__score">
-          <span className="home-info__score-label">Score</span>
-          <div>
-            <h4 className="home-info__score-title">CARRE</h4>
-            <span className="home-info__score-subtitle">4/5 dés identiques </span>
-          </div>
-          <p className="home-info__score-description">VOUS AVEZ GAGNE 2 pâtisserie(s) !</p>
-        </div>
-        <div className="home-info__lives">
-          <span className="home-info__lives-label">Lives</span>
-          <div>
-            <img src="/life.svg" alt="life" />
-            <img src="/life.svg" alt="life" />
-            <img src="/life.svg" alt="life" />
-          </div>
-        </div>
         <button className="home-info__btn" disabled>
           Scores
         </button>
@@ -49,4 +33,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Winners;

@@ -138,8 +138,8 @@ button:disabled:hover {
   color: white;
 }
 
-/* ------------------------------  Competition */
-.competition {
+/* ------------------------------  Home */
+.home {
   position: relative;
   display: flex;
   justify-content: center;
@@ -148,7 +148,7 @@ button:disabled:hover {
   height: 100vh;
 }
 
-.competition-main {
+.home-main {
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -158,7 +158,7 @@ button:disabled:hover {
   pointer-events: all;
 }
 
-.competition-main__wrapper {
+.home-main__wrapper {
   position: relative;
   width: 100%;
   height: 100%;
@@ -169,14 +169,10 @@ button:disabled:hover {
   background-color: white;
 }
 
-.competition-main__media {
-  /* position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%); */
-  margin: auto;
+.home-main__media {
   width: 30rem;
   height: 30rem;
+  margin: auto;
   filter: grayscale(100%) blur(0.2rem);
   overflow: hidden;
 
@@ -187,7 +183,7 @@ button:disabled:hover {
   }
 }
 
-.competition-main__btn {
+.home-main__btn {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -196,7 +192,7 @@ button:disabled:hover {
   z-index: 1;
 }
 
-.competition-info {
+.home-info {
   position: relative;
   display: flex;
   float: right;
@@ -208,7 +204,7 @@ button:disabled:hover {
   height: 100%;
 }
 
-.competition-info__score {
+.home-info__score {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -222,30 +218,30 @@ button:disabled:hover {
   pointer-events: all;
 }
 
-.competition-info__score-label,
-.competition-info__lives-label {
+.home-info__score-label,
+.home-info__lives-label {
   font-size: 1.111vw;
   font-weight: 700;
   text-transform: uppercase;
 }
 
-.competition-info__score-title {
+.home-info__score-title {
   font-size: 4.861vw;
   font-weight: 700;
 }
 
-.competition-info__score-subtitle {
+.home-info__score-subtitle {
   font-size: 1.111vw;
 }
 
-.competition-info__score-description {
+.home-info__score-description {
   position: relative;
   font-size: 1.111vw;
   font-weight: 700;
   text-transform: uppercase;
 }
 
-.competition-info__score-description:before {
+.home-info__score-description:before {
   content: '';
   position: absolute;
   top: -15px;
@@ -256,7 +252,7 @@ button:disabled:hover {
   opacity: 0.2;
 }
 
-.competition-info__lives {
+.home-info__lives {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -270,14 +266,14 @@ button:disabled:hover {
   pointer-events: all;
 }
 
-.competition-info__lives div {
+.home-info__lives div {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
 }
 
-.competition-info__lives img {
+.home-info__lives img {
   width: 5.25vw;
   height: 5.25vw;
 }
