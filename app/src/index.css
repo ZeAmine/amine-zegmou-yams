@@ -1,0 +1,407 @@
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('/public/fonts/NeueMontreal-Light.woff2') format('woff2'),
+    url('/public/fonts/NeueMontreal-Light.woff') format('woff');
+  font-weight: light;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('/public/fonts/NeueMontreal-Regular.woff2') format('woff2'),
+    url('/public/fonts/NeueMontreal-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('/public/fonts/NeueMontreal-Medium.woff2') format('woff2'),
+    url('/public/fonts/NeueMontreal-Medium.woff') format('woff');
+  font-weight: medium;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('/public/fonts/NeueMontreal-Bold.woff2') format('woff2'),
+    url('/public/fonts/NeueMontreal-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-size: 62.5%;
+  box-sizing: border-box;
+  scroll-behavior: initial;
+  -webkit-text-size-adjust: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Neue Montreal', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: black;
+  background: white;
+  overscroll-behavior: none;
+  pointer-events: none;
+}
+
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+a {
+  color: inherit;
+  outline: none;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: none;
+  border-radius: none;
+  background: none;
+  outline: none;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+
+/* ------------------------------  Layout */
+main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 5rem;
+  overflow: hidden;
+}
+
+button {
+  font-size: 1.111vw;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  padding: 1.5rem 7.4rem;
+  margin-top: 2rem;
+  border-radius: 1rem;
+  background-color: black;
+  border: 1px solid black;
+  transition: all 0.1s ease-out;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: white;
+  color: black;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+button:disabled:hover {
+  background-color: black;
+  color: white;
+}
+
+/* ------------------------------  Competition */
+.competition {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.competition-main {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  pointer-events: all;
+}
+
+.competition-main__wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 3rem;
+  margin-right: 3rem;
+  border-radius: 1rem;
+  border: 1px solid black;
+  background-color: white;
+}
+
+.competition-main__media {
+  /* position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%); */
+  margin: auto;
+  width: 30rem;
+  height: 30rem;
+  filter: grayscale(100%) blur(0.2rem);
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.competition-main__btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 0;
+  z-index: 1;
+}
+
+.competition-info {
+  position: relative;
+  display: flex;
+  float: right;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2rem;
+  width: fit-content;
+  height: 100%;
+}
+
+.competition-info__score {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 29.861vw;
+  height: 20.291vw;
+  padding: 3rem;
+  text-align: center;
+  border-radius: 1rem;
+  border: 1px solid black;
+  pointer-events: all;
+}
+
+.competition-info__score-label,
+.competition-info__lives-label {
+  font-size: 1.111vw;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.competition-info__score-title {
+  font-size: 4.861vw;
+  font-weight: 700;
+}
+
+.competition-info__score-subtitle {
+  font-size: 1.111vw;
+}
+
+.competition-info__score-description {
+  position: relative;
+  font-size: 1.111vw;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.competition-info__score-description:before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: black;
+  opacity: 0.2;
+}
+
+.competition-info__lives {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 29.861vw;
+  height: 14.388vw;
+  padding: 3rem;
+  text-align: center;
+  border-radius: 1rem;
+  border: 1px solid black;
+  pointer-events: all;
+}
+
+.competition-info__lives div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.competition-info__lives img {
+  width: 5.25vw;
+  height: 5.25vw;
+}
+
+/* ------------------------------  Nav */
+.nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.nav-logo {
+  position: absolute;
+  top: 5rem;
+  right: 9.027vw;
+  font-size: 2.777vw;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* ------------------------------  Auth */
+.auth {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+
+  .auth-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    padding: 5rem 0;
+  }
+
+  .auth-head {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 500;
+    }
+
+    p {
+      color: #a1a1aa;
+      text-align: center;
+      margin-top: 1rem;
+      text-wrap: balance;
+    }
+  }
+
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 35rem;
+    margin-top: 2rem;
+
+    input {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 3.2rem;
+      font-size: 1.2rem;
+      padding: 0.25rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid #27272a;
+      background-color: transparent;
+      pointer-events: all;
+
+      &::placeholder {
+        color: #a1a1aa;
+      }
+
+      &:focus-visible {
+        outline: 1px solid #fff;
+      }
+    }
+
+    button {
+      width: fit-content;
+      font-size: 1.111vw;
+      font-weight: 700;
+      color: white;
+      text-transform: uppercase;
+      padding: 1.5rem 7.4rem;
+      margin: 4rem auto;
+      border-radius: 1rem;
+      background-color: black;
+      border: 1px solid black;
+      transition: all 0.1s ease-out;
+      pointer-events: all;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: white;
+      color: black;
+    }
+  }
+
+  .auth-footer {
+    position: absolute;
+    bottom: 5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    color: #a1a1aa;
+    line-height: 1.4;
+    text-align: center;
+    padding: 0 2rem;
+    margin-top: 2rem;
+  }
+}
