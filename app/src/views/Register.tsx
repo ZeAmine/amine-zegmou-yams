@@ -1,8 +1,8 @@
 import React from 'react';
-import Auth from '../components/Auth';
+import Auth from '../components/Auth.tsx';
 
-const Login: React.FC = () => {
-  return <Auth type="login" />;
+const Register: React.FC = () => {
+  return <Auth type="register" />;
 };
 
-export default Login;
+export default Register;

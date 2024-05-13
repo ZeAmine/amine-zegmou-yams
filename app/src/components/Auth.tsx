@@ -1,46 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { clearUser } from '../store/user.ts';
+import { clearUser, RootState, setUser } from '../store/user.ts';
 import axios from 'axios';
 
 interface AuthProps {
-  type?: 'login' | 'register';
+  type: 'login' | 'register';
 }
 
-const Auth: React.FC = ({ type = 'login' }: AuthProps) => {
+const Auth: React.FC<AuthProps> = ({ type }) => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const history = useHistory();
-  // const authenticated = useSelector((state) => state.auth.authenticated);
 
-  // useEffect(() => {
-  //   if (type === 'login' && authenticated) {
-  //     history.push('/');
-  //   }
-  // }, [authenticated, type, history]);
+  const auth = useSelector((state: RootState) => state.user);
+
+  useEffect(() => {
+    if (type === 'login' && auth && auth.token) {
+      navigate('/');
+    }
+  }, [auth, type, navigate]);
 
   useEffect(() => {
     dispatch(clearUser());
   }, [dispatch]);
 
   const validate = () => {
-    const errors = [];
+    const errors: string[] = [];
     const regexEmail = /\S+@\S+\.\S+/;
 
-    if (!email || email.search(regexEmail) !== 0) {
+    if (type === 'register' && !regexEmail.test(email)) {
       errors.push('Invalid email');
+    }
+
+    if (!username) {
+      errors.push('Required username');
     }
 
     if (!password) {
       errors.push('Required password');
-    }
-
-    if (type === 'register' && password !== passwordConfirm) {
-      errors.push('Passwords do not match');
     }
 
     return errors;
@@ -65,6 +66,14 @@ const Auth: React.FC = ({ type = 'login' }: AuthProps) => {
     }
 
     if (type === 'login') {
+      try {
+        const response = await axios.post('http://localhost:3001/auth/login', { username, password });
+        localStorage.setItem('token', response.data.token);
+        dispatch(setUser(response.data));
+        navigate('/');
+      } catch (error) {
+        console.error('Erreur de connexion: ', error);
+      }
     }
   };
 
@@ -93,7 +102,12 @@ const Auth: React.FC = ({ type = 'login' }: AuthProps) => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit">{type === 'login' ? 'Connexion' : 'Inscription'}</button>
+          <button type="submit" className="auth-form__btn">
+            {type === 'login' ? 'Connexion' : 'Inscription'}
+          </button>
+          <button type="submit" className="auth-form__subBtn">
+            <a href={type === 'login' ? '/signup' : '/login'}>{type === 'login' ? "S'inscrire" : 'Se connecter'}</a>
+          </button>
         </form>
       </div>
       <p className="auth-footer">

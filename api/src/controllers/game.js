@@ -9,9 +9,11 @@ export const playGame = async (req, res) => {
       message: "User does not exist",
     });
   }
+
   if (user && user.nbr_games >= 3) {
     return res.status(200).json({
-      message: "User already played 3 games",
+      message: "Nombre maximum de parties atteint",
+      type: "PERDU",
       user: {
         id: user._id,
         email: user.email,
@@ -22,9 +24,11 @@ export const playGame = async (req, res) => {
       dice_table: [],
     });
   }
+
   if (user && user.winner.length > 0) {
     return res.status(200).json({
-      message: "User already won",
+      message: "Vous avez deja gagné des pâtisseries !",
+      type: "GAGNE",
       user: {
         id: user._id,
         email: user.email,
@@ -37,21 +41,19 @@ export const playGame = async (req, res) => {
   }
 
   user.nbr_games += 1;
-  // Lancer les dés
-  //  const dice_table = [1,2,1,2,1];
 
   let dice_table = [];
+
   for (let i = 0; i < 5; i++) {
     dice_table.push(Math.floor(Math.random() * 6) + 1);
   }
-  // Vérifier les combinaisons gagnantes
-  // (5/5 dés identiques 🎲🎲🎲🎲🎲) : L'utilisateur se verra attribuer immédiatement 3 pâtisseries.
+
   if (dice_table.every((val) => val === dice_table[0])) {
-    //attribuer 3 pastries
     const userdata = await attribuatePastries(user, 3, "YAM'S");
     if (userdata) {
       return res.status(200).json({
-        message: "Congratulations !",
+        message: "Vous avez gagné 3 pâtisseries !",
+        description: "(5/5 dés identiques 🎲🎲🎲🎲🎲)",
         user: userdata,
         dice_table: dice_table,
         type: "YAM'S",
@@ -59,13 +61,12 @@ export const playGame = async (req, res) => {
     }
   }
 
-  //(4/5 dés identiques 🎲🎲🎲🎲) : L'utilisateur se verra attribuer immédiatement 2 pâtisseries.
   if (detectForOfFive(dice_table)) {
-    //attribuer 2 pastries
     const userdata = await attribuatePastries(user, 2, "CARRE");
     if (userdata) {
       return res.status(200).json({
-        message: "Congratulations !",
+        message: "Vous avez gagné 2 pâtisseries !",
+        description: "(4/5 dés identiques 🎲🎲🎲🎲)",
         user: userdata,
         dice_table: dice_table,
         type: "CARRE",
@@ -73,22 +74,24 @@ export const playGame = async (req, res) => {
     }
   }
 
-  //DOUBLE (2 paires de dés identiques 🎲🎲 + 🎲🎲) : L'utilisateur se verra attribuer immédiatement 1 pâtisserie.
   if (detectTwoPairs(dice_table)) {
-    //attribuer 1 pastries
     const userdata = await attribuatePastries(user, 1, "DOUBLE");
     if (userdata) {
       return res.status(200).json({
-        message: "Congratulations !",
+        message: "Vous avez gagné 1 pâtisserie !",
+        description: "(2 paires de dés identiques 🎲🎲 + 🎲🎲)",
         user: userdata,
         dice_table: dice_table,
         type: "DOUBLE",
       });
     }
   }
+
   await user.save();
+
   return res.status(200).json({
-    message: "Try again !",
+    message: "RETENTEZ VOTRE CHANCE",
+    type: "PERDU",
     user: {
       id: user._id,
       email: user.email,
