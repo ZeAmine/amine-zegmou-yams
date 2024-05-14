@@ -42,11 +42,11 @@ export const playGame = async (req, res) => {
 
   user.nbr_games += 1;
 
-  let dice_table = [];
+  let dice_table = [5, 5, 5, 5, 5];
 
-  for (let i = 0; i < 5; i++) {
-    dice_table.push(Math.floor(Math.random() * 6) + 1);
-  }
+  // for (let i = 0; i < 5; i++) {
+  //   dice_table.push(Math.floor(Math.random() * 6) + 1);
+  // }
 
   if (dice_table.every((val) => val === dice_table[0])) {
     const userdata = await attribuatePastries(user, 3, "YAM'S");
@@ -130,16 +130,18 @@ const detectTwoPairs = (dice) => {
 
 const attribuatePastries = async (user, limit, type) => {
   const pastries = await Pastry.aggregate([
-    { $match: { stock: { $gt: 0 } } }, // Filtrer les éléments avec un stock supérieur à 0
-    { $sample: { size: limit } }, // Récupérer un échantillon aléatoire de la taille spécifiée
+    { $match: { stock: { $gt: 0 } } },
+    { $sample: { size: limit } },
   ]);
 
   let winnerData = [];
+
   for (let pastry of pastries) {
     let data_winner = {
       name: pastry.name,
       image: pastry.image,
-      date: new Date().toLocaleDateString(),
+      date: new Date().toLocaleDateString("fr-FR"),
+      time: new Date().toLocaleTimeString("fr-FR"),
     };
     winnerData.push(data_winner);
     await Pastry.findOneAndUpdate(
@@ -148,7 +150,7 @@ const attribuatePastries = async (user, limit, type) => {
     );
   }
   user.winner = winnerData;
-  await user.save(); // Attendre que la sauvegarde de l'utilisateur soit terminée
+  await user.save();
 
   const data = {
     id: user._id,

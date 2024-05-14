@@ -106,7 +106,8 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
             {type === 'login' ? 'Connexion' : 'Inscription'}
           </button>
           <button type="submit" className="auth-form__subBtn">
-            <a href={type === 'login' ? '/signup' : '/login'}>{type === 'login' ? "S'inscrire" : 'Se connecter'}</a>
+            <a href={type === 'login' ? '/signup' : '/login'}></a>
+            {type === 'login' ? "S'inscrire" : 'Se connecter'}
           </button>
         </form>
       </div>

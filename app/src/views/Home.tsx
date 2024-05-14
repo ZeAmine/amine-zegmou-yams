@@ -28,18 +28,15 @@ const Home: React.FC = () => {
 
   const auth = useSelector((state: RootState) => state.user);
   useEffect(() => {
-    // if (auth && auth.token && auth.role === 'admin') {
-    //   navigate('/results');
-    // }
-
     const tokenStored = localStorage.getItem('token');
 
     if (tokenStored) {
       setToken(tokenStored);
       setLives(auth.nbr_games);
       setWinner(auth.winner);
-
       // fetchData();
+    } else {
+      navigate('/login');
     }
   }, [dispatch, navigate, auth]);
 
@@ -58,27 +55,26 @@ const Home: React.FC = () => {
       setWinner(response.data.user.winner);
       setLives(response.data.user.nbr_games);
 
-      console.log(dice);
-
       return setData(response.data);
     } catch (error) {
       return console.error('Erreur lors de la récupération des détails du jeu: ', error);
     }
   };
 
-  const handleClick = async () => {
+  const setPlay = async () => {
     main.current?.classList.add('is-active');
 
-    await fetchData().then(() => {
-      console.log('data', data);
-    });
+    await fetchData();
 
-    // if (winner.length !== 0) {
-    //   setTimeout(() => {
-    //     dispatch(clearUser());
-    //     navigate('/winners');
-    //   }, 1000);
-    // }
+    if (auth.nbr_games >= 3 || winner.length !== 0) {
+      navigate('/winners');
+    }
+  };
+
+  const setLogout = () => {
+    localStorage.removeItem('token');
+    dispatch(clearUser());
+    navigate('/login');
   };
 
   useEffect(() => {
@@ -87,34 +83,45 @@ const Home: React.FC = () => {
     //   dispatch(clearUser());
     //   navigate('/winners');
     // }
-
-    if (auth.winner.length !== 0) {
-      // navigate('/winners');
-    }
-
-    if (auth.nbr_games >= 3) {
-      // navigate('/winners');
-    }
   }, [auth, lives, winner, dispatch, navigate]);
 
   return (
     <main className="home">
       <div ref={main} className="home-main">
         <div className="home-main__wrapper">
-          <button className="home-main__btn" onClick={handleClick}>
+          <button className="home-main__btn" onClick={setPlay}>
             Lancer les dés
           </button>
-          <button className="home-main__scoreBtn" onClick={handleClick}>
-            <a href="/winners">Scores</a>
+          <button className="home-main__scoreBtn">
+            <a href="/winners"></a>
+            Scores
           </button>
-          <figure className="home-main__media">
-            <img src="https://picsum.photos/seed/picsum/200/300" alt="cake" />
-          </figure>
+          <div className="home-main__medias">
+            {winner.length ? (
+              winner.map((item, index) => (
+                <figure key={index} className="home-main__media">
+                  <img src={`http://localhost:3001/images/${item.image}`} alt="cake" />
+                </figure>
+              ))
+            ) : (
+              <>
+                <figure className="home-main__media">
+                  <img src="https://picsum.photos/seed/picsum/200/300" alt="cake" />
+                </figure>
+                <figure className="home-main__media">
+                  <img src="https://picsum.photos/seed/picsum/200/300" alt="cake" />
+                </figure>
+                <figure className="home-main__media">
+                  <img src="https://picsum.photos/seed/picsum/200/300" alt="cake" />
+                </figure>
+              </>
+            )}
+          </div>
           <div className="home-main__dices">
             <div className="home-main__dices-wrapper">
-              {dice.map((value, index) => (
-                <DiceImage key={index} value={value} />
-              ))}
+              {dice.length && token
+                ? dice.map((value, index) => <DiceImage key={index} value={value} />)
+                : winner.map((item, index) => <h4 key={index}>{item.name}</h4>)}
             </div>
           </div>
         </div>
@@ -137,10 +144,9 @@ const Home: React.FC = () => {
           </div>
         </div>
         <div className="home-info__btns">
-          <button className="home-info__btn">Se déconnecter</button>
-          {/* <button className="home-info__btn" disabled>
-            Se deconnecter
-          </button> */}
+          <button className="home-info__btn" onClick={setLogout}>
+            Se déconnecter
+          </button>
         </div>
       </div>
     </main>

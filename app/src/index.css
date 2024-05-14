@@ -69,6 +69,11 @@ a {
   text-decoration: none;
 }
 
+ul {
+  list-style: none;
+  grid-template-columns: repeat();
+}
+
 button {
   font: inherit;
   color: inherit;
@@ -109,6 +114,7 @@ main {
 }
 
 button {
+  position: relative;
   font-size: 1.111vw;
   font-weight: 700;
   color: white;
@@ -118,9 +124,17 @@ button {
   border-radius: 1rem;
   background-color: black;
   border: 1px solid black;
-  transition: all 0.1s ease-out;
+  transition: background-color 0.1s ease-out, color 0.1s ease-out;
   pointer-events: all;
   cursor: pointer;
+
+  a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 button:hover {
@@ -170,6 +184,10 @@ button:disabled:hover {
   .home-main__scoreBtn {
     display: inherit;
   }
+
+  .home-main__wrapper h4 {
+    display: inherit;
+  }
 }
 
 .home-main__wrapper {
@@ -181,13 +199,27 @@ button:disabled:hover {
   border-radius: 1rem;
   border: 1px solid black;
   background-color: white;
+
+  h4 {
+    display: none;
+    font-size: 1.111vw;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+  }
+}
+
+.home-main__medias {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
 }
 
 .home-main__media {
   display: none;
-  width: 30rem;
-  height: 30rem;
-  margin: auto;
+  width: 100%;
+  height: 27rem;
+  border-radius: 1rem;
   overflow: hidden;
 
   img {
@@ -235,6 +267,7 @@ button:disabled:hover {
   position: absolute;
   bottom: 5rem;
   left: 47rem;
+  margin-top: 0;
   background-color: white;
   color: black;
 }
@@ -409,8 +442,8 @@ button:disabled:hover {
     width: 100%;
 
     h1 {
-      font-size: 2.4rem;
-      font-weight: 500;
+      font-size: 3rem;
+      font-weight: bold;
     }
 
     p {
@@ -493,4 +526,100 @@ button:disabled:hover {
     padding: 0 2rem;
     margin-top: 2rem;
   }
+}
+
+/* ------------------------------  Winners */
+.winners {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+.winners-main {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+  height: 100%;
+  pointer-events: all;
+}
+
+.winners-main__wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 3rem;
+  margin-right: 3rem;
+  border-radius: 1rem;
+  border: 1px solid black;
+  background-color: white;
+
+  h4 {
+    display: none;
+    font-size: 1.111vw;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+  }
+}
+
+.winners-main__title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.winners-main__labels {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 30rem 1fr 1fr;
+  margin-top: 5.5rem;
+
+  :before {
+    content: '';
+    position: absolute;
+    top: 3rem;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #a1a1aa;
+    opacity: 0.2;
+  }
+}
+
+.winners-main__label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #a1a1aa;
+  text-transform: uppercase;
+}
+
+.winners-main__users {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5rem;
+}
+
+.winners-main__user {
+  display: grid;
+  grid-template-columns: 1fr 30rem 1fr 1fr;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.winners-info {
+  position: relative;
+  display: flex;
+  float: right;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2rem;
+  width: 30%;
+  height: 100%;
+}
+
+.winners-info__btn {
+  margin-top: 0;
 }
