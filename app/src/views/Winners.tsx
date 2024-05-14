@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setUser, clearUser } from '../store/user.ts';
+import { clearUser } from '../store/user.ts';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -21,7 +21,6 @@ interface User {
 
 const Winners: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const [time, setTime] = useState({});
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -88,6 +87,10 @@ const Winners: React.FC = () => {
         </div>
       </div>
       <div className="winners-info">
+        <button className="winners-info__btn">
+          <a href="/"></a>
+          Retour
+        </button>
         <button className="winners-info__btn" onClick={setLogout}>
           <a href="/login"></a>
           Se déconnecter

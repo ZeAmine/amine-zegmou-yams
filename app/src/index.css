@@ -230,27 +230,55 @@ button:disabled:hover {
 }
 
 .home-main__dices {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   margin-inline: auto;
-  margin-top: 8rem;
+  margin-top: 10rem;
 }
 
 .home-main__dices-wrapper {
   position: relative;
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   gap: 3rem;
   width: fit-content;
   height: 7rem;
+  margin-inline: auto;
 
   svg {
     width: auto;
     height: 100%;
   }
+}
+
+.home-main__pastry {
+  font-size: 1.111vw;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.home-main__pastries {
+  width: 100%;
+  margin-inline: auto;
+  margin-top: 10rem;
+}
+
+.home-main__pastries-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: fit-content;
+  height: 7rem;
+  margin-inline: auto;
+}
+
+.home-main__pastry {
+  font-size: 1.111vw;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .home-main__btn {

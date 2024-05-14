@@ -20,6 +20,7 @@ const Home: React.FC = () => {
   const [description, setDescription] = useState('');
   const [lives, setLives] = useState(0);
   const [winner, setWinner] = useState([{}]);
+  const [play, setPlay] = useState(false);
 
   const main = React.createRef<HTMLDivElement>();
 
@@ -27,6 +28,7 @@ const Home: React.FC = () => {
   const dispatch = useDispatch();
 
   const auth = useSelector((state: RootState) => state.user);
+
   useEffect(() => {
     const tokenStored = localStorage.getItem('token');
 
@@ -34,7 +36,6 @@ const Home: React.FC = () => {
       setToken(tokenStored);
       setLives(auth.nbr_games);
       setWinner(auth.winner);
-      // fetchData();
     } else {
       navigate('/login');
     }
@@ -61,14 +62,10 @@ const Home: React.FC = () => {
     }
   };
 
-  const setPlay = async () => {
-    main.current?.classList.add('is-active');
+  const onPlay = async () => {
+    setPlay(true);
 
     await fetchData();
-
-    if (auth.nbr_games >= 3 || winner.length !== 0) {
-      navigate('/winners');
-    }
   };
 
   const setLogout = () => {
@@ -78,52 +75,51 @@ const Home: React.FC = () => {
   };
 
   useEffect(() => {
-    // if (lives === 3 || auth.winner.length !== 0) {
-    //   localStorage.removeItem('token');
-    //   dispatch(clearUser());
-    //   navigate('/winners');
-    // }
+    if (lives >= 3 || winner.length !== 0) {
+      // navigate('/winners');
+    }
   }, [auth, lives, winner, dispatch, navigate]);
 
   return (
     <main className="home">
-      <div ref={main} className="home-main">
+      <div ref={main} className={`home-main ${play ? 'is-active' : ''}`}>
         <div className="home-main__wrapper">
-          <button className="home-main__btn" onClick={setPlay}>
+          <button className="home-main__btn" onClick={onPlay}>
             Lancer les dés
           </button>
           <button className="home-main__scoreBtn">
             <a href="/winners"></a>
             Scores
           </button>
-          <div className="home-main__medias">
-            {winner.length ? (
-              winner.map((item, index) => (
+          {winner.length ? (
+            <div className="home-main__medias">
+              {winner.map((item, index) => (
                 <figure key={index} className="home-main__media">
                   <img src={`http://localhost:3001/images/${item.image}`} alt="cake" />
                 </figure>
-              ))
-            ) : (
-              <>
-                <figure className="home-main__media">
-                  <img src="https://picsum.photos/seed/picsum/200/300" alt="cake" />
-                </figure>
-                <figure className="home-main__media">
-                  <img src="https://picsum.photos/seed/picsum/200/300" alt="cake" />
-                </figure>
-                <figure className="home-main__media">
-                  <img src="https://picsum.photos/seed/picsum/200/300" alt="cake" />
-                </figure>
-              </>
-            )}
-          </div>
-          <div className="home-main__dices">
-            <div className="home-main__dices-wrapper">
-              {dice.length && token
-                ? dice.map((value, index) => <DiceImage key={index} value={value} />)
-                : winner.map((item, index) => <h4 key={index}>{item.name}</h4>)}
+              ))}
             </div>
-          </div>
+          ) : null}
+          {dice.length ? (
+            <div className="home-main__dices">
+              <div className="home-main__dices-wrapper">
+                {dice.map((value, index) => (
+                  <DiceImage key={index} value={value} />
+                ))}
+              </div>
+            </div>
+          ) : null}
+          {!dice.length ? (
+            <div className="home-main__pastries">
+              <div className="home-main__pastries-wrapper">
+                {winner.map((item, index) => (
+                  <h4 key={index} className="home-main__pastry">
+                    {item.name}
+                  </h4>
+                ))}
+              </div>
+            </div>
+          ) : null}
         </div>
       </div>
       <div className="home-info">
