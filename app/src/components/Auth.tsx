@@ -29,33 +29,8 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
     dispatch(clearUser());
   }, [dispatch]);
 
-  const validate = () => {
-    const errors: string[] = [];
-    const regexEmail = /\S+@\S+\.\S+/;
-
-    if (type === 'register' && !regexEmail.test(email)) {
-      errors.push('Invalid email');
-    }
-
-    if (!username) {
-      errors.push('Required username');
-    }
-
-    if (!password) {
-      errors.push('Required password');
-    }
-
-    return errors;
-  };
-
   const onSubmit = async (e: any) => {
     e.preventDefault();
-
-    const errors = validate();
-
-    if (errors.length > 0) {
-      return console.error(errors);
-    }
 
     if (type === 'register') {
       try {
@@ -63,7 +38,6 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
         navigate('/login');
       } catch (error) {
         setError(error.response.data.message);
-        console.log(error.response.data.message);
       }
     }
 
@@ -75,7 +49,6 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
         navigate('/');
       } catch (error) {
         setError(error.response.data.message);
-        console.log(error.response.data.message);
       }
     }
   };

@@ -26,14 +26,11 @@ app.use("/game", gameRouter);
 
 app.use("/admin", AdminRouter);
 
-//connection a mongodb
 mongoose
   .connect("mongodb://mongo/yams", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    user: "root",
-    pass: "foobar",
-  }) //mongodb://root:foobar@mongo/yams
+  })
   .then(() => {
     console.log("Connected to MongoDB");
     app.listen(port, () => {
