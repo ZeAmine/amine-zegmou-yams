@@ -42,11 +42,11 @@ export const playGame = async (req, res) => {
 
   user.nbr_games += 1;
 
-  let dice_table = [4, 4, 4, 4, 2];
+  let dice_table = [];
 
-  // for (let i = 0; i < 5; i++) {
-  //   dice_table.push(Math.floor(Math.random() * 6) + 1);
-  // }
+  for (let i = 0; i < 5; i++) {
+    dice_table.push(Math.floor(Math.random() * 6) + 1);
+  }
 
   if (dice_table.every((val) => val === dice_table[0])) {
     const userdata = await attribuatePastries(user, 3, "YAM'S");

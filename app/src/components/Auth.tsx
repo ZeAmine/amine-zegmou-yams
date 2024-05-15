@@ -12,6 +12,7 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -61,7 +62,8 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
         await axios.post('http://localhost:3001/auth/register', { email, username, password });
         navigate('/login');
       } catch (error) {
-        console.error("Erreur d'inscription: ", error);
+        setError(error.response.data.message);
+        console.log(error.response.data.message);
       }
     }
 
@@ -72,7 +74,8 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
         dispatch(setUser(response.data));
         navigate('/');
       } catch (error) {
-        console.error('Erreur de connexion: ', error);
+        setError(error.response.data.message);
+        console.log(error.response.data.message);
       }
     }
   };
@@ -102,6 +105,7 @@ const Auth: React.FC<AuthProps> = ({ type }) => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          {error && <p className="auth-error">{error}</p>}
           <button type="submit" className="auth-form__btn">
             {type === 'login' ? 'Connexion' : 'Inscription'}
           </button>

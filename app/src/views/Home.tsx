@@ -99,7 +99,12 @@ const Home: React.FC = () => {
                 </figure>
               ))}
             </div>
-          ) : null}
+          ) : (
+            <div className="home-main__boilerplate">
+              <h4>Pâtisseries</h4>
+              <p>Les gâteaux à gagner</p>
+            </div>
+          )}
           {dice.length ? (
             <div className="home-main__dices">
               <div className="home-main__dices-wrapper">

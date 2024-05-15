@@ -71,7 +71,6 @@ a {
 
 ul {
   list-style: none;
-  grid-template-columns: repeat();
 }
 
 button {
@@ -119,7 +118,7 @@ button {
   font-weight: 700;
   color: white;
   text-transform: uppercase;
-  padding: 1.5rem 7.4rem;
+  padding: 1.5rem 5.138vw;
   margin-top: 2rem;
   border-radius: 1rem;
   background-color: black;
@@ -176,7 +175,7 @@ button:disabled:hover {
   .home-main__btn {
     top: inherit;
     bottom: 5rem;
-    left: 17rem;
+    left: calc(11.805vw - 3rem);
     transform: translate(0, 0);
   }
 
@@ -187,6 +186,10 @@ button:disabled:hover {
 
   .home-main__wrapper h4 {
     display: inherit;
+  }
+
+  .home-main__boilerplate {
+    display: flex;
   }
 }
 
@@ -226,6 +229,29 @@ button:disabled:hover {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+}
+
+.home-main__boilerplate {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  height: 24rem;
+  border-radius: 1rem;
+  border: 1px solid #a1a1aa;
+
+  h4 {
+    font-size: 1.111vw;
+    font-weight: 700;
+    color: #a1a1aa;
+    text-transform: uppercase;
+  }
+
+  p {
+    color: #a1a1aa;
   }
 }
 
@@ -294,7 +320,7 @@ button:disabled:hover {
   display: none;
   position: absolute;
   bottom: 5rem;
-  left: 47rem;
+  right: calc(13.888vw - 3rem);
   margin-top: 0;
   background-color: white;
   color: black;
@@ -542,6 +568,13 @@ button:disabled:hover {
     }
   }
 
+  .auth-error {
+    font-size: 1.2rem;
+    color: #ff0000;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
   .auth-footer {
     position: absolute;
     bottom: 5rem;
@@ -601,7 +634,7 @@ button:disabled:hover {
 .winners-main__labels {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 30rem 1fr 1fr;
+  grid-template-columns: 1fr 20.833vw 1fr 1fr;
   margin-top: 5.5rem;
 
   :before {
@@ -631,7 +664,7 @@ button:disabled:hover {
 
 .winners-main__user {
   display: grid;
-  grid-template-columns: 1fr 30rem 1fr 1fr;
+  grid-template-columns: 1fr 20.833vw 1fr 1fr;
   font-weight: bold;
   margin-bottom: 1rem;
 }
