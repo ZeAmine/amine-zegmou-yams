@@ -1,19 +1,37 @@
 import User from "../models/user.js";
 import Pastry from "../models/pastries.js";
 
+export const getResults = async (req, res) => {
+  const usersWithWinner = await User.find({ winner: { $ne: [] } });
+
+  let results = [];
+
+  for (const usr of usersWithWinner) {
+    results.push({
+      id: usr._id,
+      email: usr.email,
+      username: usr.username,
+      nbr_games: usr.nbr_games,
+      winner: usr.winner,
+    });
+  }
+
+  res.status(200).json(results);
+};
+
 export const playGame = async (req, res) => {
   let user = await User.findOne({ email: req.user.email });
 
   if (!user) {
     return res.status(400).json({
-      message: "User does not exist",
+      message: "Utilisateur non trouvé",
     });
   }
 
   if (user && user.nbr_games >= 3) {
     return res.status(200).json({
       message: "Nombre maximum de parties atteint",
-      type: "PERDU",
+      type: user.winner.length ? "GAGNE" : "PERDU",
       user: {
         id: user._id,
         email: user.email,

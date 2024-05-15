@@ -28,7 +28,7 @@ const Winners: React.FC = () => {
   useEffect(() => {
     const fetchResults = async (token: string) => {
       try {
-        const response = await axios.get('http://localhost:3001/admin/results', {
+        const response = await axios.get('http://localhost:3001/game/results', {
           headers: { 'x-access-token': token },
         });
 
